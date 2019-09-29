@@ -1,0 +1,38 @@
+<div id="message"></div>
+<input type="number" id="number" />
+<button id="guessButton">Guess</button>
+<div id="pastGuess"></div>
+
+<script>
+  let pastGuess = document.getElementById('pastGuess').innerText;
+  let randomNum = Math.floor(Math.random() * 20) + 1;
+  let totalGuess = 10;
+  let button = document.getElementById('guessButton');
+
+  console.log(randomNum);
+  button.addEventListener('click', () => {
+    totalGuess--;
+    let userGuess = parseInt(document.getElementById('number').value);
+    if (userGuess < randomNum) {
+      let message = document.getElementById('message');
+
+      message.innerHTML = `<h1 style = "background-color: red">Sorry your guess is too low, guess higher. You have ${totalGuess} guesses left</h1>`;
+    }
+
+    if (userGuess > randomNum) {
+      let message = document.getElementById('message');
+      message.innerHTML = `<h1 style = "background-color: red">Sorry your guess is too high, guess lower. You have ${totalGuess} guesses left</h1>`;
+    }
+
+    if (userGuess === randomNum) {
+      let message = document.getElementById('message');
+
+      message.innerHTML =
+        '<h1 style = "background-color: green">Congratulations!! You guessed correctly.</h1>';
+    }
+
+    pastGuess = `<p>${pastGuess}${userGuess}<br></p>`;
+
+    document.getElementById('pastGuess').innerHTML = pastGuess;
+  });
+</script>
